@@ -15,9 +15,14 @@ class Biblioteka:
                 ksiazka.ile += 1
 
     def wypisz_ksiazki(self):
+        result = []
         for e in self.lista_ksiazek:
             wynik = (e.tytul, e.autor, self.egzemplarze.count(e))
-            print(wynik)
+            result.append(wynik)
+
+        result = sorted(result, key = lambda x: x[0])
+        for r in result: print(r)
+
 
 class Ksiazka:
 
