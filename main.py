@@ -33,6 +33,7 @@ class Library:
         for book in uniques_set:
             i = uniques.count(book)
             result.append((book[0], book[1], i))
+        result = sorted(result, key = lambda x: -x[2])
         for x in result:
             print(x)
 
@@ -47,7 +48,7 @@ for i in range(n):
     year = book[2]
     bib.add_book(author, title, year)
 
-pprint.pprint(bib.get_count_books())
+print(bib.get_count_books())
 
 
 
