@@ -33,7 +33,7 @@ class Library:
         for book in uniques_set:
             i = uniques.count(book)
             result.append((book[0], book[1], i))
-        result = sorted(result, key = lambda x: -x[2])
+        result = sorted(result, key = lambda x: x[0])
         for x in result:
             print(x)
 
