@@ -48,7 +48,7 @@ for i in range(n):
     year = book[2]
     bib.add_book(author, title, year)
 
-print(bib.get_count_books())
+bib.get_count_books()
 
 
 
