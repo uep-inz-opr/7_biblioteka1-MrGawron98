@@ -1,41 +1,63 @@
 import pprint
 
-class Library:
+
+class Library(list):
 
     def __init__(self):
-        self.core = dict()
+        super(Library, self).__init__()
 
-    def add_book(self, author, title, year, state = "wolny", reader = "NN"):
-        if author not in self.core:
-            self.core[author] = []
-        self.core[author].append({"title":title, "year":year, "state":state, "reader":reader})
+    def add_book(self, author, title, year, state = "wolny"):
+        self.append({"author": author, "title": title, "year": year, "state": state, "reader": "NN"})
 
-    def get_size(self):
-        count = 0
-        for author in self.core:
-                count += len(self.core[author])
-        return count
+    def get_uniques(self):
+        return list(set([(book['title'], book['author']) for book in self]))
 
-    def get_library(self):
-        list = []
-        for author in self.core:
-            for book in self.core[author]:
-                book["author"] = author
-                list.append(book)
-        return list
-
-    def get_count_books(self):
-        uniques = []
-        for book in self.get_library():
-            uniques.append((book['title'], book['author']))
-        uniques_set = set(uniques)
+    def get_uniques_count(self):
+        uniques = self.get_uniques()
         result = []
-        for book in uniques_set:
-            i = uniques.count(book)
-            result.append((book[0], book[1], i))
-        result = sorted(result, key = lambda x: x[0])
-        for x in result:
-            print(x)
+        for book in uniques:
+            count = []
+            for e in self:
+                if e['title'] == book[0] and e['author'] == book[1]:
+                    count.append(e)
+            result.append((book[0], book[1], len(count)))
+        return sorted(result, key = lambda x: x[0])
+
+    # def __init__(self):
+    #     self.core = dict()
+    #
+    # def add_book(self, author, title, year, state = "wolny", reader = "NN"):
+    #     #if author not in self.core:
+    #     #    self.core[author] = []
+    #     self.core[author].append({"title":title, "year":year, "state":state, "reader":reader})
+    #
+    # def get_size(self):
+    #     count = 0
+    #     for author in self.core:
+    #             count += len(self.core[author])
+    #     return count
+    #
+    # def get_library(self):
+    #     list = []
+    #     for author in self.core:
+    #         for book in self.core[author]:
+    #             book["author"] = author
+    #             list.append(book)
+    #     return list
+    #
+    # def get_count_books(self):
+    #     uniques = []
+    #     for book in self.get_library():
+    #         uniques.append((book['title'], book['author']))
+    #     uniques_set = set(uniques)
+    #     result = []
+    #     for book in uniques_set:
+    #         i = uniques.count(book)
+    #         result.append((book[0], book[1], i))
+    #     result = sorted(result, key = lambda x: x[0])
+    #     for x in result:
+    #         print(x)
+
 
 bib = Library()
 
@@ -48,44 +70,8 @@ for i in range(n):
     year = book[2]
     bib.add_book(author, title, year)
 
-bib.get_count_books()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+for book in bib.get_uniques_count():
+    print(book)
 
 # class Biblioteka:
 #
