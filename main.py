@@ -1,6 +1,3 @@
-import pprint
-
-
 class Library(list):
 
     def __init__(self):
@@ -22,6 +19,20 @@ class Library(list):
                     count.append(e)
             result.append((book[0], book[1], len(count)))
         return sorted(result, key = lambda x: x[0])
+
+bib = Library()
+
+n = int(input())
+
+for i in range(n):
+    book = eval(input())
+    title = book[0]
+    author = book[1]
+    year = book[2]
+    bib.add_book(author, title, year)
+
+for book in bib.get_uniques_count():
+    print(book)
 
     # def __init__(self):
     #     self.core = dict()
@@ -57,21 +68,6 @@ class Library(list):
     #     result = sorted(result, key = lambda x: x[0])
     #     for x in result:
     #         print(x)
-
-
-bib = Library()
-
-n = int(input())
-
-for i in range(n):
-    book = eval(input())
-    title = book[0]
-    author = book[1]
-    year = book[2]
-    bib.add_book(author, title, year)
-
-for book in bib.get_uniques_count():
-    print(book)
 
 # class Biblioteka:
 #
